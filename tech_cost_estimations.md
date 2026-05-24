@@ -1,5 +1,5 @@
 # Technical Department Budget & Cost Estimations
-**Project:** Hutano Mudanga (Mobile-first Animal Health & Vet Directory Platform)  
+**Project:** Project X (Mobile-first Animal Health & Vet Directory Platform)  
 **Date:** May 2026  
 **Document Purpose:** Tech budget estimations for investors, focusing on monthly running costs (OpEx) and separate hardware equipment costs (CapEx).
 
@@ -7,7 +7,7 @@
 
 ## 1. Executive Summary
 
-**Hutano Mudanga** is a mobile-first livestock health platform designed to connect farmers with veterinary doctors and provide AI-driven diagnostics ("Assistant Screen") in Southern Africa.
+**Project X** is a mobile-first livestock health platform designed to connect farmers with veterinary doctors and provide AI-driven diagnostics ("Assistant Screen") in Southern Africa.
 
 This budget is divided into two parts to suit an investor's financial model:
 1. **Operational Expenditures (OpEx):** Monthly recurring technical costs directly tied to server hosting, databases, AI computation, geocoding maps, and internet connectivity.
@@ -70,4 +70,4 @@ These are one-time or milestone-based equipment purchases for the technical team
 
 > [!IMPORTANT]
 > **Scalable Hardware Lifecycle:**
-> Hardware costs scale linearly with developer team size, while server costs scale sub-linearly with user volume. This ensures high operating leverage as Hutano Mudanga expands its farmer network.
+> Hardware costs scale linearly with developer team size, while server costs scale sub-linearly with user volume. This ensures high operating leverage as Project X expands its farmer network.
