@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Hutano Mudanga</title>
+    <style>
+        :root {
+            --primary-color: #2F6B3B;
+            --primary-hover: #224E2B;
+            --bg-color: #F7F5EF;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 6px -1px rgba(47, 107, 59, 0.2);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 5px;
+        }
+
+        p, ul {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            background-color: var(--bg-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding-bottom: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+            }
+            .card {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-placeholder">HM</div>
+            <h1>Hutano Mudanga</h1>
+            <p class="last-updated">Last Updated: May 25, 2026</p>
+        </div>
+
+        <div class="card">
+            <p>Welcome to <strong>Hutano Mudanga</strong> (referred to as "we", "us", or "our"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
+            
+            <p>This Privacy Policy applies to all information collected through our mobile application, website, and related services (collectively, the "Services").</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We collect personal information that you voluntarily provide to us when registering on the App, adding animal health records, or using our Services. This includes:</p>
+            <ul>
+                <li><strong>Account Information:</strong> Name, phone number, email address, password, and farm profiles.</li>
+                <li><strong>Livestock & Health Records:</strong> Animal types, health histories, treatment logs, diagnoses, and photos of livestock or symptoms uploaded by you.</li>
+                <li><strong>Location Information:</strong> We request access to your device's GPS location (even in the background, if necessary) to help you locate and coordinate with nearby veterinary doctors in our Vet Directory.</li>
+                <li><strong>AI Diagnostic Inputs:</strong> Text descriptions, chat history, and images sent to the AI Assistant for diagnostic evaluation.</li>
+            </ul>
+
+            <h2>2. How We Use Your Information</h2>
+            <p>We use the information we collect for operational and service delivery purposes, including:</p>
+            <ul>
+                <li><strong>Service Delivery:</strong> To manage farmer accounts, livestock directories, and veterinary records.</li>
+                <li><strong>AI Diagnostics:</strong> To process your queries and animal photos through secure artificial intelligence APIs to generate preliminary health assessments.</li>
+                <li><strong>Vet Matching:</strong> To use your coordinates to display veterinary doctors relative to your location and plan veterinary visits.</li>
+                <li><strong>Notifications:</strong> To send you alerts regarding treatment schedules, diagnostic results, and messaging notifications.</li>
+            </ul>
+
+            <h2>3. How Your Information is Shared</h2>
+            <p>We only share information with your consent, to comply with laws, or to provide you with Services. This includes:</p>
+            <ul>
+                <li><strong>Veterinary Professionals:</strong> If you connect with a veterinarian through our directory, we share your farm location and livestock history to facilitate care.</li>
+                <li><strong>Service Providers:</strong> We use secure third-party platforms to host and process data:
+                    <ul>
+                        <li><em>Supabase:</em> Secure database hosting, authentication, and photo storage.</li>
+                        <li><em>AI APIs (OpenAI/Anthropic):</em> Securely processing diagnostic queries (without training models on your private data).</li>
+                        <li><em>Mapping Providers:</em> Translating coordinates to physical addresses or routing directions.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2>4. Data Storage and Security</h2>
+            <p>We implement a variety of administrative, technical, and physical security measures designed to protect your personal data. All account data and livestock records are stored securely on our backend cloud infrastructure with industry-standard encryption protocols.</p>
+
+            <h2>5. Your Rights and Data Deletion</h2>
+            <p>Depending on your region, you have the right to access, correct, or request the deletion of your personal data. You can delete your farm records or your entire account directly through the settings interface in the mobile app, or by contacting our support team.</p>
+
+            <h2>6. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. The updated version will be indicated by an updated "Last Updated" date at the top of this page and will be effective as soon as it is accessible.</p>
+
+            <div class="contact-info">
+                <h2>7. Contact Us</h2>
+                <p>If you have any questions or feedback about this policy, you can contact the technical and support department at:</p>
+                <p>
+                    <strong>Email:</strong> support@hutanomudanga.app<br>
+                    <strong>Address:</strong> Harare, Zimbabwe
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Hutano Mudanga. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
