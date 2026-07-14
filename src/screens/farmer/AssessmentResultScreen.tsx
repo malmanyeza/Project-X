@@ -53,6 +53,14 @@ export const AssessmentResultScreen: React.FC<{ navigation: any; route: any }> =
   };
 
   const handleSave = async () => {
+    if (!user) {
+      Alert.alert('Sign In Required', 'Please sign in to save assessments to your history.', [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Sign In', onPress: () => navigation.navigate('Auth') }
+      ]);
+      return;
+    }
+
     if (isSaved) {
       Alert.alert('Saved', 'This assessment is already in your history.');
       return;
@@ -87,6 +95,48 @@ export const AssessmentResultScreen: React.FC<{ navigation: any; route: any }> =
     }
   };
 
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Report',
+      'Are you sure you want to delete this preliminary assessment from your history? This action cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { 
+          text: 'Delete', 
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              setSaving(true);
+              const id = assessment?.id || route.params?.assessmentId;
+              if (id) {
+                // Delete related shares first to avoid foreign key constraint errors
+                await supabase
+                  .from('vet_shares')
+                  .delete()
+                  .eq('assessment_id', id);
+
+                const { error } = await supabase
+                  .from('assessments')
+                  .delete()
+                  .eq('id', id);
+
+                if (error) throw error;
+              }
+              Alert.alert('Deleted!', 'Assessment deleted from history successfully.', [
+                { text: 'OK', onPress: () => navigation.goBack() }
+              ]);
+            } catch (err) {
+              console.error('Delete error:', err);
+              Alert.alert('Error', 'Failed to delete report. Please try again.');
+            } finally {
+              setSaving(false);
+            }
+          }
+        }
+      ]
+    );
+  };
+
   const handleShareText = async () => {
     try {
       const content = `Project X Health Report\nCondition: ${assessment.likely_condition}\nUrgency: ${assessment.urgency_level}\n\nSummary: ${assessment.ai_summary}`;
@@ -97,6 +147,14 @@ export const AssessmentResultScreen: React.FC<{ navigation: any; route: any }> =
   };
 
   const openSendToVet = async () => {
+    if (!user) {
+      Alert.alert('Sign In Required', 'Please sign in to share reports with veterinary professionals.', [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Sign In', onPress: () => navigation.navigate('Auth') }
+      ]);
+      return;
+    }
+
     // First ensure it's saved so the vet_shares FK works
     if (!isSaved) {
       Alert.alert(
@@ -173,15 +231,22 @@ export const AssessmentResultScreen: React.FC<{ navigation: any; route: any }> =
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Ionicons name="close" size={24} color={colors.text} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Health Report</Text>
-        <TouchableOpacity onPress={handleShareText} disabled={!isReady}>
-          <Ionicons name="share-outline" size={24} color={isReady ? colors.primary : colors.border} />
-        </TouchableOpacity>
-      </View>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Ionicons name="close" size={24} color={colors.text} />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Health Report</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
+            {isSaved && (
+              <TouchableOpacity onPress={handleDelete} style={{ padding: 4 }}>
+                <Ionicons name="trash-outline" size={22} color={colors.error} />
+              </TouchableOpacity>
+            )}
+            <TouchableOpacity onPress={handleShareText} disabled={!isReady}>
+              <Ionicons name="share-outline" size={24} color={isReady ? colors.primary : colors.border} />
+            </TouchableOpacity>
+          </View>
+        </View>
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <DisclaimerCard />
@@ -189,17 +254,19 @@ export const AssessmentResultScreen: React.FC<{ navigation: any; route: any }> =
         {/* Diagnosis Card */}
         <View style={styles.diagnosisCard}>
           <View style={styles.diagnosisHeader}>
-            <View style={styles.iconCircle}>
-              <MaterialCommunityIcons name="stethoscope" size={24} color={colors.textOnPrimary} />
-            </View>
-            <View style={{ flex: 1 }}>
+            <View style={styles.diagnosisHeaderLeft}>
+              <View style={styles.iconCircleSmall}>
+                <MaterialCommunityIcons name="stethoscope" size={18} color={colors.primary} />
+              </View>
               <Text style={styles.diagnosisLabel}>Preliminary Diagnosis</Text>
-              <Text style={styles.diagnosisName}>
-                {assessment.likely_condition === 'Analyzing...' ? 'Gathering Evidence...' : assessment.likely_condition}
-              </Text>
             </View>
             <StatusChip status={assessment.urgency_level} variant="urgency" />
           </View>
+          
+          <Text style={styles.diagnosisName}>
+            {assessment.likely_condition === 'Analyzing...' ? 'Gathering Evidence...' : assessment.likely_condition}
+          </Text>
+
           <View style={styles.confidenceRow}>
             <Ionicons name="shield-checkmark" size={16} color={colors.success} />
             <Text style={styles.confidenceText}>
@@ -381,11 +448,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface, borderRadius: borderRadius.xl, padding: spacing.lg,
     borderWidth: 1, borderColor: colors.borderLight, ...shadows.sm,
   },
-  diagnosisHeader: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginBottom: spacing.md },
-  iconCircle: { width: 48, height: 48, borderRadius: 24, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center' },
-  diagnosisLabel: { ...typography.caption, color: colors.textSecondary, textTransform: 'uppercase', letterSpacing: 1 },
-  diagnosisName: { ...typography.h2, color: colors.text },
-  confidenceRow: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: colors.success + '10', alignSelf: 'flex-start', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 12 },
+  diagnosisHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.sm },
+  diagnosisHeaderLeft: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  iconCircleSmall: { width: 32, height: 32, borderRadius: 16, backgroundColor: colors.primary + '15', alignItems: 'center', justifyContent: 'center' },
+  diagnosisLabel: { ...typography.caption, color: colors.textSecondary, textTransform: 'uppercase', letterSpacing: 0.8, fontWeight: '600' },
+  diagnosisName: { ...typography.h2, color: colors.text, fontSize: 22, lineHeight: 28, marginTop: spacing.xs, marginBottom: spacing.md },
+  confidenceRow: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: colors.success + '10', alignSelf: 'flex-start', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 12 },
   confidenceText: { ...typography.caption, color: colors.success, fontWeight: '700' },
   section: { gap: spacing.sm },
   sectionTitle: { ...typography.h4, color: colors.text, marginBottom: 4 },

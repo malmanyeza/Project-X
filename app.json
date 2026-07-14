@@ -1,30 +1,48 @@
 {
   "expo": {
-    "name": "hutano-mudanga",
-    "slug": "hutano-mudanga",
-    "version": "1.0.0",
+    "name": "Project X",
+    "slug": "project-x",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F7F5EF"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "3",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Project X uses your location to find vets near you.",
+        "NSLocationAlwaysUsageDescription": "Project X uses your location to find vets near you."
+      }
     },
     "android": {
+      "package": "com.hutanomudanga.app",
+      "versionCode": 3,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#2F6B3B",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5c4d1355-d33b-4fef-9f42-f4e3cbc378ac"
+      }
+    },
+    "owner": "projectxeas"
   }
 }

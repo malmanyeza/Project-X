@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "816313206388",
+    "project_id": "project-x-ab705",
+    "storage_bucket": "project-x-ab705.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816313206388:android:c818da92ca9a4b9f1eb321",
+        "android_client_info": {
+          "package_name": "com.hutanomudanga.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUWZuhKjjI18YhkF9nJl8pI9QWbpaAhQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
